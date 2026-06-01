@@ -1,0 +1,165 @@
+/**
+ * Main CSS File
+ *
+ * Tailwind CSS v4 - Using new @import syntax
+ * Docs: https://tailwindcss.com/docs/installation/using-vite
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quicksand&display=swap');
+
+@import 'tailwindcss';
+
+/* Tell Tailwind where to scan for classes */
+@source "./**/*.{js,jsx,ts,tsx}";
+@source "../index.html";
+
+/**
+ * Custom Global Styles
+ *
+ * Add your custom global styles here if needed
+ * Prefer using Tailwind utilities in components
+ */
+
+@theme {
+  /* Font Dasar */
+  --font-display: 'Quicksand', sans-serif;
+
+  /* Primitive Tokens (Warna Dasar) */
+  --color-base-white: #ffffff;
+  --color-base-black: #000000;
+
+  --color-primary-100: #ffe0d8;
+  --color-primary-200: #ff623e;
+  --color-primary-300: #cc4e32;
+  --color-primary-400: #80311f;
+
+  --color-neutral-25: #fdfdfd;
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e9eaeb;
+  --color-neutral-300: #d5d7da;
+  --color-neutral-400: #a4a7ae;
+  --color-neutral-500: #717680;
+  --color-neutral-600: #535862;
+  --color-neutral-700: #414651;
+  --color-neutral-800: #252b37;
+  --color-neutral-900: #181d27;
+  --color-neutral-950: #0a0d12;
+
+  --shadow-button-inset: inset 4px 4px 4px 0px rgba(255, 255, 255, 0.25);
+
+  /* Set default centering */
+  --container-center: true;
+
+  /* Set responsive padding */
+  --container-padding: 1rem;
+  --container-padding-sm: 2rem;
+  --container-padding-lg: 4rem;
+  --container-padding-xl: 5rem;
+  --container-padding-2xl: 6rem;
+
+  /* Menambahkan spacing otomatis (fluid spacing) */
+  --spacing-container-padding: clamp(1rem, 6vw, 8.75rem);
+  --height-navbar: clamp(3.5rem, 5vw, 4.5rem);
+
+  /* card untuk timeline/our process */
+  --width-card-half: 26rem;
+  --min-height-card-row: 7px;
+
+  --spacing-navbar-px: 8.75rem; /* 140px / 16px = 8.75rem */
+  --text-fluid-hero: clamp(2.25rem, 1.785rem + 2.321vw, 3.5rem);
+  /* --text-fluid-title: clamp(1.5rem, 2.5vw + 1rem, 2.25rem); */
+  --text-fluid-title: clamp(1.75rem, 2.5vw + 1rem, 2.25rem);
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  html,
+  body {
+    /* Directly assign the variable to eliminate compile loops */
+    background-color: var(--color-base-black);
+    @apply font-display text-slate-100 antialiased;
+  }
+
+  *,
+  *::before,
+  *::after {
+    @apply transition-colors duration-500 ease-in-out;
+  }
+}
+
+@utility text-main-color {
+  color: var(--color-neutral-950);
+
+  @variant dark {
+    color: var(--color-neutral-25);
+    /* color: var(--color-primary-200); */
+  }
+}
+
+@utility text-content-color {
+  color: var(--color-neutral-950);
+
+  @variant dark {
+    color: var(--color-neutral-400);
+    /* color: var(--color-primary-400); */
+  }
+}
+
+/* Class global text-section-title */
+@utility text-section-title {
+  /* Gunakan fungsi @apply untuk menggabungkan kelas bawaan Tailwind */
+  @apply text-fluid-title font-bold text-main-color tracking-wider leading-9;
+
+  /* Atur ukuran font responsif menggunakan clamp() */
+  font-size: clamp(1.5rem, 2.5vw + 1rem, 2.25rem);
+
+  /* Atur warna teks default (Light mode) */
+  color: var(--color-neutral-900);
+
+  /* Atur warna teks otomatis saat Dark mode aktif */
+  @variant dark {
+    color: var(--color-white);
+  }
+}
+
+/* background dan border card default */
+@utility card-base {
+  @apply bg-neutral-50 dark:bg-neutral-950 border-2 border-neutral-100 dark:border-neutral-900; /*border-neutral/900*/
+}
+
+/* background dan border form input dan textarea */
+@utility ui-input-base {
+  @apply w-full rounded-lg border border-neutral-400 dark:border-neutral-800 px-4 py-3 text-sm text-base-black dark:text-base-white placeholder-neutral-600 focus:border-neutral-700 focus:outline-none focus:ring-1 focus:ring-neutral-700 transition;
+}
+
+/* Optional: Custom scrollbar styles */
+/* Uncomment if you want custom scrollbar
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+*/
